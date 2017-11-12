@@ -31,7 +31,7 @@ def generate_fake_user(count=15):  # 生成虚拟数据,先不用管它的写法
         except IntegrityError:
             db.session.rollback()
     user_count = User.query.count()
-    print(f'生成{user_count}位虚拟用户')
+    print('生成{}位虚拟用户'.format(user_count))
     for i in range(40):
         u = User.query.offset(randint(0, user_count - 1)).first()
         p = Post(title=forgery_py.lorem_ipsum.title(),
@@ -39,7 +39,7 @@ def generate_fake_user(count=15):  # 生成虚拟数据,先不用管它的写法
                  board_id=3, author=u)
         db.session.add(p)
         db.session.commit()
-    print(f'生成了40篇虚拟')
+    print('生成了40篇虚拟')
 
 # @manager.option('--username', '-u', dest='real_name', default='李存勖')
 # @manager.option('--email', '-e', dest='email', default='18873614432@163.com')
@@ -60,7 +60,7 @@ def create_super_user():
     board3 = Board(name='django', author=user)
     db.session.add_all([board1, board2, board3])
     db.session.commit()
-    print(f'超级管理员< {user.username} >添加成功', '板块添加成功')
+    print('超级管理员< {} >添加成功', '板块添加成功'.format(user.username))
 
 
 @manager.shell

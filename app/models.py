@@ -130,7 +130,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return f'用户名:{self.username}'
+        return '用户名:{}'.format(self.username)
 
 
 class AnonymousUser(AnonymousUserMixin):  # 出于一致性,不用检测用户是否登陆,对游客也可以权限检测方法
@@ -139,6 +139,7 @@ class AnonymousUser(AnonymousUserMixin):  # 出于一致性,不用检测用户�
 
     def is_super(self):
         return False
+
 
 login_manage.anonymous_user = AnonymousUser
 
@@ -157,8 +158,8 @@ class Board(db.Model):  # 板块/分类的模型
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # 处在一对多中的多侧,引用外键
     posts = db.relationship('Post', backref='board', lazy='dynamic')
 
-    def __repr__(self):
-        return f'板块名是:{self.real_name},创建者是{self.author.username}'
+    # def __repr__(self):
+        # return f'板块名是:{self.real_name},创建者是{self.author.username}'
 
 
 class Comment(db.Model):
@@ -192,8 +193,8 @@ class Post(db.Model):  # 文章
     comments = db.relationship('Comment', backref='post', lazy='dynamic')  # 文章与评论一对多
     stars = db.relationship('PostStar', backref='post', lazy='dynamic')  # 文章与点赞一对多
 
-    def __repr__(self):
-        return f'作者是{self.author.username}'
+    # def __repr__(self):
+        # return f'作者是{self.author.username}'
 
 
 class PostStar(db.Model):
