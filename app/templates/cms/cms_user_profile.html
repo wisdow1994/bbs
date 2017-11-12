@@ -1,0 +1,88 @@
+{% extends 'cms/cms_base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}{{ super() }}修改资料{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <script src="{{ static('cms/js/cms_edit_profile.js') }}"></script>
+{% endblock %}
+
+
+{% block page_title %}用户资料详情{% endblock %}
+
+{% block page_content %}
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>用户名：</td>
+                <td>{{ user.username }}</td>
+
+            </tr><tr>
+
+                <td>手机号码：</td>
+                <td>{{ user.telephone }}</td>
+            </tr>
+            <tr>
+                <td>加入时间：</td>
+                <td>{{ user.join_time }}</td>
+
+            </tr>
+            <tr>
+                <td>状态：</td>
+                <td>
+                    {% if user.ban_bool %}
+                        <span style="font-size: 15px" class="label label-success label-primary">正在使用</span>
+                    {% else %}
+                        <span style="font-size: 15px" class="label label-danger label-primary">已禁用</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>真实姓名：</td>
+                <td>{{ user.realname or '未填写' }}</td>
+
+            </tr>
+            <tr>
+                <td>性别：</td>
+                <td>
+                    {% if user.gender == 1 %}
+                        男
+                    {% elif user.gender == 2 %}
+                        女
+                    {% elif user.gender == 3 %}
+                        保密
+                    {% else %}
+                        未知
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>邮箱：</td>
+                <td>{{ user.email or '未填写' }}</td>
+            </tr>
+            <tr>
+                <td>论坛积分：</td>
+                <td>{{ user.points }}</td>
+            </tr>
+            <tr>
+                <td>qq号码：</td>
+                <td>{{ user.qq or '未填写' }}</td>
+            </tr><tr>
+                <td>个人签名：</td>
+                <td>
+                    <p>{{ user.signature or '未填写' }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% if not user.ban_bool %}
+                        <a href="{{ url_for('cms.change_active', id=user.id, ban_Bool=1) }}" class="btn btn-primary btn-lg active">恢复</a>
+                    {% else %}
+                        <a href="{{ url_for('cms.change_active', id=user.id, ban_Bool=0) }}" class="btn btn-primary btn-lg active">禁用</a>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

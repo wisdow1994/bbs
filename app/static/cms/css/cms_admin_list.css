@@ -1,0 +1,11 @@
+
+.top-box{
+    padding: 5px 10px;
+    border-radius: 2px;
+    background: #ecedf0;
+    overflow: hidden;
+}
+
+.top-box a{
+    float: right;
+}

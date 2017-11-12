@@ -1,0 +1,86 @@
+{% extends 'front/front_base.html' %}
+
+{% block title %}
+    个人信息设置
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ static('front/css/front_edit_profile.css') }}">
+    <script src="https://cdn.staticfile.org/Plupload/2.1.1/moxie.js"></script>
+	<script src="https://cdn.staticfile.org/Plupload/2.1.1/plupload.dev.js"></script>
+	<script src="https://cdn.staticfile.org/qiniu-js-sdk/1.0.14-beta/qiniu.js"></script>
+    <script src="{{ url_for('static',filename='common/xtqiniu.js') }}"></script>
+    <script>
+        $(function () {
+            xtqiniu.setUp({
+                'browse_btn': 'avatar-img',
+                'success': function (up,file,info) {
+                    var imgTag = $('#avatar-img');
+                    imgTag.attr('src',file.name);
+                }
+            });
+        });
+
+        $(function () {
+            $("#submit").click(function (event) {
+                event.preventDefault();
+                var username = $('input[name=username]').val();
+                var real_name = $('input[name=real_name]').val();
+                var location = $('input[name=location]').val();
+                var about_me = $('#about_me').val();
+                {#遇到之前的问题,而且很多方式之前已经排除过了,如果再重复的话也不要/别超过三遍啊,就是对于textarea输入框的取值有问题#}
+                var avatar = $('#avatar-img').attr('src');
+
+                xtajax.ajax({
+                    'url': '/edit_profile',
+                    'type': 'POST',
+                    'data':{
+                        'username': username,
+                        'real_name': real_name,
+                        'about_me': about_me,
+                        'location': location,
+                        'avatar':avatar
+                    },
+                    'success': function (data) {
+                        if(data['code'] == 200){
+                            xtalert.alertSuccessToast('恭喜！资料修改成功!')
+                        }else{
+                            xtalert.alertInfoToast(data['message']);
+                        }
+                    }
+                })
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block container %}
+    <div class="container-inner">
+        <h2>个人信息设置</h2>
+        <div class="form-group">
+            <label>用户名</label>
+            <input type="text" class="form-control" placeholder="请输入用户名" name="username" value="{{ current_user.username }}">
+        </div>
+        <div class="form-group">
+            <label>真实姓名</label>
+            <input type="text" class="form-control" name="real_name" placeholder="请输入真实姓名" value="{{ current_user.real_name or '未填写' }}">
+        </div>
+        <div class="form-group">
+            <label>所在城市</label>
+            <input type="text" class="form-control" name="location" placeholder="请输入所在城市" value="{{ current_user.location or '木有填写哦' }}">
+        </div>
+        <div class="form-group">
+            <label>头像</label>
+            <div>
+                <img src="{{ current_user.avatar or static('images/logo.jpg') }}" class="img-circle avatar-img" alt="点击选择头像" id="avatar-img">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>关于我</label>
+            <textarea id="about_me" class="form-control" placeholder="请输入内容" name="about_me">{{ current_user.about_me or '你很懒哟' }}</textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-lg" id="submit">保存</button>
+        </div>
+    </div>
+{% endblock %}

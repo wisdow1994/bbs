@@ -1,0 +1,109 @@
+{% extends 'front/front_base.html' %}
+
+{% block title %}主页{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ static('front/css/iconfont/iconfont.css') }}">
+    <link rel="stylesheet" href="{{ static('front/css/front_index.css') }}">
+{% endblock %}
+
+{% block container %}
+    <div class="lg-container">
+        <ul class="top-group">
+            <li {% if sort_type == 1 %} class='current' {% endif %}>
+                <a href="{{ url_for('auth.set_sort', sort_id=1) }}">
+                    <div class="icon-group">
+                        <i class="iconfont icon-zuixin"></i>
+                    </div>
+                    <p class="block-title">最新帖子</p>
+                </a>
+            </li>
+            <li {% if sort_type == 2 %} class='current' {% endif %}>
+                <a href="{{ url_for('auth.set_sort', sort_id=2) }}">
+                    <div class="icon-group">
+                        <i class="iconfont icon-jinghua"></i>
+                    </div>
+                    <p class="block-title">精华帖子</p>
+                </a>
+            </li>
+            <li {% if sort_type == 3 %} class='current' {% endif %}>
+                <a href="{{ url_for('auth.set_sort', sort_id=3) }}">
+                    <div class="icon-group">
+                        <i class="iconfont icon-zhichizuiduoxianti"></i>
+                    </div>
+                    <p class="block-title">点赞最多</p>
+                </a>
+            </li>
+            <li {% if sort_type == 4 %} class='current' {% endif %}>
+                <a href="{{ url_for('auth.set_sort', sort_id=4) }}">
+                    <div class="icon-group">
+                        <i class="iconfont icon-appzuixinhuifu"></i>
+                    </div>
+                    <p class="block-title">评论最多</p>
+                </a>
+            </li>
+        </ul>
+        <div class="post-list-container outer-border white-bg">
+            <div class="post-con">
+                <ul class="post-list">
+                    {% for post in posts %}
+                        <li>
+                            <div class="post-list-img">
+                                <a href="{{ url_for('auth.profile', username=post.author.username) }}">
+                                    <img src="{{ static('images/logo.jpg') }}" alt="">
+                                </a>
+                            </div>
+                            <div class="post-list-con">
+                                <div class="title" style="font-size: 15px">
+                                    <a class="title_name" href="{{ url_for('auth.detail',post_id=post.id) }}">
+                                        {{ post.title }}
+                                        {% if post.high_light %}
+                                            <span class="label label-danger label-primary">精</span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="auth-msg">
+                                    <a href="#" class="user_name">{{ post.author.username }}</a>
+                                    <span class="time">{{ moment(post.create_time).fromNow() }}</span>
+                                    {#         中文化时间显示时间戳          #}
+                                    <span class="comment-count"> 评论:{{ post.comments.count() }} </span>
+                                    <span class="read-count"> 阅读:{{ post.read_count }} </span>
+                                    <span class="read-count"> 点赞:{{ post.stars.count() }}</span>
+
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="page-nav">
+            <nav aria-label="...">
+                {% if pagination %}
+                <div class="pagination">
+                {{ pagination_widget(pagination, 'auth.index') }}
+                </div>
+                {% endif %}
+            </nav>
+        </div>
+
+
+    </div>
+    <div class="sm-container">
+        <div class="add-post-group">
+            <a href="{{ url_for('auth.add_post') }}" class="btn btn-primary btn-block">发表新帖子</a>
+        </div>
+        <div class="list-group">
+            <span class="list-group-item header">板块</span>
+            <a href="{{ url_for('auth.set_sort', board_id=0) }}" class="list-group-item {% if board_type==0 %}active{% endif %}">所有文章
+                <span class="badge">{{ post_all_count }}</span>
+            </a>
+            {% for board in boards %}
+                <a href="{{ url_for('auth.set_sort', board_id=board.id) }}" class="list-group-item {% if loop.index == board_type %}active{% endif %}">
+                    {{ board.name }}
+                    <span class="badge">{{ board.posts.count() }}</span>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

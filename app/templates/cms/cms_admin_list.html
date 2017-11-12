@@ -1,0 +1,58 @@
+{% extends 'cms/cms_base.html' %}
+
+{% block title %}{{ super() }}{{ title }}列表{% endblock %}
+
+{% block page_title %}{{ title }}列表{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ static('cms/css/cms_admin_list.css') }}">
+
+{% endblock %}
+
+{% block page_content %}
+    <div class="top-box">
+        <a href="{{ url_for(point) }}" class="btn btn-warning btn-lg">添加{{ title }}</a>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>邮箱</th>
+                <th>拥有权限说明</th>
+                <th>详细资料</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {{ user.show_permission() }}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('cms.user_profile', id=user.id) }}" class="btn btn-primary btn-lg active">详细资料</a>
+                    </td>
+                    <td>
+                        {% if user.ban_bool %}
+                            <span style="font-size: 15px" class="label label-success label-primary">正在使用</span>
+                        {% else %}
+                            <span style="font-size: 15px" class="label label-danger label-primary">已禁用</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not user.ban_bool %}
+                            <a href="{{ url_for('cms.change_active', id=user.id, ban_Bool=1) }}" class="btn btn-primary btn-lg active">恢复</a>
+                        {% else %}
+                            <a href="{{ url_for('cms.change_active', id=user.id, ban_Bool=0) }}" class="btn btn-primary btn-lg active">禁用</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

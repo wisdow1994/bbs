@@ -1,0 +1,26 @@
+.container{
+    width: 1080px;
+    background: #fff;
+    margin: 10px auto;
+    border: 1px solid #e6e6e6;
+}
+.container-inner{
+    background: #fff;
+    padding: 30px;
+    position: relative;
+}
+.post-title{
+    padding: 20px 0;
+}
+.origin-comment-group{
+    padding-bottom: 20px;
+}
+#editor{
+    height: 500px;
+}
+.captcha-group{
+    width: 255px;
+}
+p{
+    font-size: 28px;
+}
