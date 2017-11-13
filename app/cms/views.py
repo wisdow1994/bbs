@@ -172,8 +172,8 @@ def change_active(id):  # 禁用一个管理员或者普通用户
     db.session.add(user)
     db.session.commit()
     if user.ban_bool:
-        flash(f'已经恢复<{user.role.real_name}-{user.username}>')
-    flash(f'已经禁用<{user.role.real_name}-{user.username}>')
+        flash('已经恢复<{}-{}>'.format(user.role.name, user.username))
+    flash('已经禁用<{}-{}>'.format(user.role.name, user.username))
     if user.role.name == '用户':
         return redirect(request.args.get('next') or url_for('cms.cms_user_list'))  # 返回用户列表
     return redirect(request.args.get('next') or url_for('cms.cms_admin_list'))  # 返回到管理员列表
