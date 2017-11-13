@@ -17,7 +17,7 @@ manager.add_command('server', Server)
 
 
 @manager.command
-def generate_fake_user(count=15):  # 生成虚拟数据,先不用管它的写法
+def generate_fake_user(count=15):
     seed()
     for i in range(count):
         u = User(email=forgery_py.internet.email_address(),
