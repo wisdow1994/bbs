@@ -32,8 +32,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/cms/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="176" column="56" lean-forward="false" selection-start-line="176" selection-start-column="56" selection-end-line="176" selection-end-column="56" />
+            <state relative-caret-position="436">
+              <caret line="174" column="8" lean-forward="false" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="66" />
               <folding>
                 <element signature="e#0#99#0" expanded="true" />
               </folding>
@@ -56,7 +56,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>add_pos</find>
       <find>now</find>
       <find>img</find>
       <find>location</find>
@@ -86,6 +85,7 @@
       <find>url</find>
       <find>404</find>
       <find>high</find>
+      <find>f</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -723,8 +723,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/cms/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="176" column="56" lean-forward="false" selection-start-line="176" selection-start-column="56" selection-end-line="176" selection-end-column="56" />
+        <state relative-caret-position="436">
+          <caret line="174" column="8" lean-forward="false" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="66" />
           <folding>
             <element signature="e#0#99#0" expanded="true" />
           </folding>
