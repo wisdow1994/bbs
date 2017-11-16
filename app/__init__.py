@@ -31,7 +31,7 @@ def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
 
-    admin.init_app(app)
+    # admin.init_app(app)
     csrf.init_app(app)
     db.init_app(app)
     bootstrap.init_app(app)
@@ -42,8 +42,7 @@ def create_app(config_name):
     from .cms import cms as cms_blueprint
     from .auth import auth as auth_blueprint
 
-    app.register_blueprint(cms_blueprint)
-    # app.register_blueprint(auth_blueprint, url_perfix='/auth')
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(cms_blueprint, url_prefix='/cms')
 
     return app

@@ -172,8 +172,9 @@ def change_active(id):  # 禁用一个管理员或者普通用户
     db.session.add(user)
     db.session.commit()
     if user.ban_bool:
-        flash(f'已经恢复<{user.role.real_name}-{user.username}>')
-    flash(f'已经禁用<{user.role.real_name}-{user.username}>')
+        flash(f'已经恢复<{user.role.name}-{user.username}>')
+    else:
+        flash(f'已经禁用<{user.role.name}-{user.username}>')
     if user.role.name == '用户':
         return redirect(request.args.get('next') or url_for('cms.cms_user_list'))  # 返回用户列表
     return redirect(request.args.get('next') or url_for('cms.cms_admin_list'))  # 返回到管理员列表
@@ -198,7 +199,7 @@ def cms_boards():
 @login_required
 @permission_required(Permission.ADMIN)
 def add_board():  # 新增一个模块
-    name = request.form.get('real_name')
+    name = request.form.get('name')
     # 判断是否有name这个参数
     if not name:
         return json.json_params_error(message='必须指定板块的名称！')
@@ -312,7 +313,6 @@ def cms_posts():  # 帖子列表
 
 
 @cms.route('/high_light', methods=['POST'])
-@login_required
 @permission_required(Permission.ADMIN)
 def high_light():  # 加精或者取消
     high_light = request.form.get('high_light')
@@ -320,6 +320,7 @@ def high_light():  # 加精或者取消
     print(high_light, type(high_light))
     post = Post.query.get_or_404(post_id)
     post.high_light = bool(int(high_light))
+    db.session.add(post)
     return json.json_result()
 
 

@@ -1,6 +1,6 @@
 from wtforms import (StringField, PasswordField, BooleanField, SubmitField, ValidationError, IntegerField,
                      TextAreaField)
-from wtforms.validators import DataRequired, Length, Email, EqualTo, Regexp, URL
+from wtforms.validators import DataRequired, Length, Email, EqualTo, Regexp, URL, InputRequired
 
 from ..utils.cache import captcha
 from ..models import User
@@ -62,7 +62,7 @@ class AddCommentForm(BaseForm):
 
 class PostStarForm(BaseForm):
     post_id = IntegerField(validators=[DataRequired(message='必须包含所属文章id！')])
-    is_star = BooleanField(validators=[DataRequired(message='必须输入行为!')])
+    is_star = BooleanField(validators=[InputRequired(message='必须输入行为!')])
 
 
 class EditProfileForm(BaseForm):

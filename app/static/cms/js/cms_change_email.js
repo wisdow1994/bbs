@@ -5,7 +5,7 @@ $(function () {
        var email = $('input[name=email]').val();
 
        xtajax.get({
-           'url': '/send_token',
+           'url': 'send_token',
            //用来发送邮箱验证码的视图函数
            'data': {
                'email': email
@@ -32,7 +32,7 @@ $(function () {
        var tokenInput = $('input[name=token]');
 
        xtajax.post({
-           'url': '/change_email',
+           'url': 'change_email',
            'data':{
                'email': emailInput.val(),
                'token': tokenInput.val()

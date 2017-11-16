@@ -188,7 +188,13 @@ def generate_imageCaptcha():  # 用来返回图片流
     # 指定响应的类型
     response.content_type = 'image/png'
     captcha.set(text.lower(), text.lower(), timeout=300)
+    session['set_value'] = text.lower()  # 用于在没有图片效果的时候,img的alt文字说明
     return response
+
+
+@auth.route('/test/')
+def test():
+    return render_template('front/test.html')
 
 
 @auth.route('/send_token')
@@ -269,18 +275,23 @@ def add_comments():
 def post_star():  # 帖子点赞
     form = PostStarForm(request.form)
     if form.validate_on_submit():
+    # 取消验证的操作传的是false值,不能通过这个表单验DataRequired，只能通过InputRequired验证
         post_id = form.post_id.data
         post = Post.query.get_or_404(post_id)
         is_star = form.is_star.data
+        print(is_star, type(is_star))
         if is_star:
             star = PostStar(author=current_user._get_current_object(), post=post)
             db.session.add(star)
-            # db.session.commit()
+            db.session.commit()
+            print('点赞可以成功的')
             return json.json_result()
-        else:
-            star = PostStar.query.filter_by(author_id=current_user.id, post_id=post_id).first()
-            db.session.delete(star)
-            return json.json_result()
+        print('已经到了取消点赞这一步')
+        star = PostStar.query.filter_by(author_id=current_user.id).filter_by(post_id=post_id).first()
+        db.session.delete(star)
+        db.session.commit()
+        print('return之前')
+        return json.json_result()
 
 
 @auth.route('/qiniu_token/')

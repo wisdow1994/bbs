@@ -10,7 +10,7 @@ $(function () {
         var password = passwordInput.val();
         var password2 = password2Input.val();
         xtajax.ajax({
-            'url': '/change-password',
+            'url': 'change-password',
             'type':'POST',
             'data': {
                 'old_password': old_password,

@@ -7060,11 +7060,11 @@ _e(function (E, $) {
 
         // 创建 form 和 iframe
         var iframeId = 'iframe' + E.random();
-        var $iframe = $('<iframe real_name="' + iframeId + '" id="' + iframeId + '" frameborder="0" width="0" height="0"></iframe>');
+        var $iframe = $('<iframe name="' + iframeId + '" id="' + iframeId + '" frameborder="0" width="0" height="0"></iframe>');
         var multiple = self.multiple;
         var multipleTpl = multiple ? 'multiple="multiple"' : '';
         var $p = $('<p>选择图片并上传</p>');
-        var $input = $('<input type="file" ' + multipleTpl + ' real_name="' + uploadFileName + '"/>');
+        var $input = $('<input type="file" ' + multipleTpl + ' name="' + uploadFileName + '"/>');
         var $btn = $('<input type="submit" value="上传"/>');
         var $form = $('<form enctype="multipart/form-data" method="post" action="' + uploadUrl + '" target="' + iframeId + '"></form>');
         var $container = $('<div style="margin:10px 20px;"></div>');
@@ -7073,7 +7073,7 @@ _e(function (E, $) {
 
         // 增加用户配置的参数，如 token
         $.each(editor.config.uploadParams, function (key, value) {
-            $form.append( $('<input type="hidden" real_name="' + key + '" value="' + value + '"/>') );
+            $form.append( $('<input type="hidden" name="' + key + '" value="' + value + '"/>') );
         });
 
         $container.append($form);

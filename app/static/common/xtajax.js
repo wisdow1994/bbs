@@ -25,7 +25,7 @@ var xtajax = {
 		$.ajaxSetup({
 			'beforeSend':function(xhr,settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                    // var csrftoken = $('input[real_name=csrf_token]').attr('value');
+                    // var csrftoken = $('input[name=csrf_token]').attr('value');
                     //这种形式就不适合wtf.quick_form(form)这种形式了
                     // var csrftoken = "{{ csrf_token() }}"
                     //应该要学会查看浏览器的控制台分析,可以直接定位到引发错误的js代码位置

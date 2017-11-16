@@ -7,7 +7,8 @@ class Config:
     QINIU_SECRET_KEY = 'tFFzRFEpvVBESjRzfY2-QwkxsXzUqAcxyh6rt2Ac'
 
     BABEL_DEFAULT_LOCALE = 'zh'  # 时区设置为中国,name数据库中的时间函数可以使用utcnow
-    SERVER_NAME = 'bbs.com:5000'  # 本地域名,详见C:\WINDOWS\system32\drivers\etc\hosts文件
+    # SERVER_NAME = 'bbs.com:5000'  # 本地域名,详见C:\WINDOWS\system32\drivers\etc\hosts文件
+    # 部署到云主机上,这个本地域名就不能使用了
     SECRET_KEY = os.urandom(24)
     # SECRET_KEY = 'hehe'  # 开发阶段就用固定的秘钥了,不用每次重启
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True

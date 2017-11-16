@@ -1,12 +1,13 @@
 $(function () {
     $('.hightlight-btn').click(function (event) {
         event.preventDefault();
+        // var url = {{ url_for('cms.high_light') }};
         var post_id = $(this).attr('data-post-id');
         var high_light = parseInt($(this).attr('data-is-highlight'));
-        console.log(high_light);
         xtajax.ajax({
-            'url': '/high_light',
-            'type': 'POST',
+            // 'url': url,
+            'url': 'high_light',
+            'type': 'post',
             'data': {
                 'post_id': post_id,
                 'high_light': high_light
@@ -38,7 +39,7 @@ $(function () {
         event.preventDefault();
         var post_id = $(this).attr('data-post-id');
         xtajax.post({
-            'url': '/remove_post',
+            'url': 'remove_post',
             'data':{
                 'post_id': post_id
             },

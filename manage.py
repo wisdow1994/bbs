@@ -41,10 +41,11 @@ def generate_fake_user(count=15):  # 生成虚拟数据,先不用管它的写法
         db.session.commit()
     print('生成了40篇虚拟')
 
+
+@manager.command
 # @manager.option('--username', '-u', dest='real_name', default='李存勖')
 # @manager.option('--email', '-e', dest='email', default='18873614432@163.com')
 # @manager.option('--password', '-p', dest='password', default='123456')
-@manager.command
 # def create_super_admin(username, email, password):
 def create_super_user():
     # if User.query.filter_by(email=email).first():

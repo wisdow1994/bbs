@@ -35,7 +35,7 @@
                         {% endif %}
                         {% for star in post.stars %}
                             <a href="#">
-                                <img src="{{ static('images/logo.jpg') }}" alt="">
+                                <img src="{{ star.author.avatar or static('images/logo.jpg') }}" alt="">
                             </a>
                         {% endfor %}
                     </div>
@@ -88,7 +88,7 @@
                 <p class="username">{{ post.author.username }}</p>
 {#                <p class="txt">{{ post.author.points }}积分</p>#}
                 <div class="btn-box">
-                    <a href="{{ url_for('auth.profile', username=current_user.username) }}" class="btn btn-info btn-lg">Ta的主页</a>
+                    <a href="{{ url_for('auth.profile', username=post.author.username) }}" class="btn btn-info btn-lg">Ta的主页</a>
                 </div>
             </div>
         </div>

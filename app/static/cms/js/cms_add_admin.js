@@ -38,7 +38,7 @@ $(function () {
         }
 
         xtajax.ajax({
-            'url': '/cms_add_admin',
+            'url': 'cms_add_admin',
             'type': 'POST',
             'data': {
                 'email': email,

@@ -1,7 +1,7 @@
 import random
 import string
 # pip install Pillow
-# Image:是一个画板(context),ImageDraw:是一个画笔, ImageFont:画笔的字体
+# Image:是一个画板(context),ImageDraw:是一个画笔, ImageFont:画L import Image, ImageDraw, ImageFont
 from PIL import Image, ImageDraw, ImageFont
 from . import captcha
 
@@ -10,6 +10,9 @@ class ImageCaptcha:  # Captcha验证码
     # 把一些常量抽取成类属性
     # 字体的位置
     font_path = 'utils/cache/verdana.ttf'
+    # font_path = '/root/bbs/app/utils/cache/verdana.ttf'
+    # 在liunx云主机中使用
+
     # 生成几位数的验证码
     number = 4
     # 生成验证码图片的宽度和高度

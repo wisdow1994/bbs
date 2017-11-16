@@ -3,7 +3,7 @@ $(function () {
        event.preventDefault();
        var self = $(this);
        // 获取邮箱
-       var email = $('input[real_name=email]').val();
+       var email = $('input[name=email]').val();
 
        if(!email){
            xtalert.alertInfoToast('请填写邮箱！');

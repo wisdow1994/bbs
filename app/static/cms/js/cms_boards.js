@@ -8,7 +8,7 @@ $(function () {
             'confirmCallback': function (inputValue) {
                 // 发送ajax请求给后台
                 xtajax.ajax({
-                    'url': '/add_board/',
+                    'url': 'add_board/',
                     'type': 'POST',
                     'data': {
                         'name': inputValue
@@ -41,7 +41,7 @@ $(function () {
             'confirmCallback': function (inputValue) {
                 // 把数据发送到后台
                 xtajax.post({
-                    'url': '/edit_board/',
+                    'url': 'edit_board/',
                     'data': {
                         'name': inputValue,
                         'board_id': board_id
@@ -73,7 +73,7 @@ $(function () {
             'confirmCallback': function () {
                 // 把数据发送到后台
                 xtajax.post({
-                    'url': '/delete_board/',
+                    'url': 'delete_board/',
                     // 'type': 'POST',
                     'data': {
                         'board_id': board_id
