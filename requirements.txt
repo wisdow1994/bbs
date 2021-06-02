@@ -71,7 +71,7 @@ kombu==4.1.0
 lxml==4.0.0
 Mako==1.0.7
 Markdown==2.6.9
-markdown2==2.3.4
+markdown2==2.4.0
 MarkupSafe==1.0
 olefile==0.44
 parso==0.1.0
