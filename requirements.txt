@@ -69,7 +69,7 @@ jieba==0.39
 Jinja2==2.9.6
 kombu==4.1.0
 lxml==4.0.0
-Mako==1.0.7
+Mako==1.2.2
 Markdown==2.6.9
 markdown2==2.3.4
 MarkupSafe==1.0
